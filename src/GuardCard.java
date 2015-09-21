@@ -1,3 +1,4 @@
+import java.util.*;
 public class GuardCard extends Card{
 
 public static final String GUARD_NAME = "Guard";
@@ -8,7 +9,7 @@ public static final String GUARD_DESC = "Guard lets you try and guess another pl
     super(GUARD_NAME, GUARD_VALUE, GUARD_DESC);
   }
 
-  public void action(){
-    
-  }
+  // public void action(){
+  //
+  // }
 }

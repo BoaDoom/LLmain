@@ -1,3 +1,4 @@
+import java.util.*;
 public class Card{
   private String name;
   private int value;
@@ -7,5 +8,9 @@ public class Card{
     this.name = name;
     this.value = value;
     this.desc = desc;
+  }
+
+  public String getName(){
+    return name;
   }
 }
