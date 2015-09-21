@@ -22,7 +22,7 @@ public class LearnerLoveLetter{
       for(int i=0; i < playerCount; i++){
         System.out.println(players.playersArray.get(i).getCurrentCard(0).getName());
         }
-      while(true){ //starting of actual round rotation, check to make sure minimum players are active
+      while(true){ //starting of player rotation
 
 
 
