@@ -16,6 +16,7 @@ public class LearnerLoveLetter{
 
     while(true){ //start of a round
       deck.shuffle();
+      if
       for(int i=0; i < playerCount; i++){ // deals out one card per person to start
         players.playersArray.get(i).takeCard(deck.deal());
         }

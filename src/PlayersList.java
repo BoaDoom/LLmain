@@ -6,6 +6,7 @@ public class PlayersList
   public static final int MAXIMUM_PLAYER_COUNT = 4;
   public static final int PLAYER_COUNT_EXTRA_RULE = 2; //the number of players where an extra set of rules is activated
   private static int totalPlayerNumber; //final player count
+  private static int winRequire; //number of round wins to win the game
   public int lastWinner = 0; //playernumber of who won previous round, defaults to player 1 at posision 0
   public List<Player> playersArray;
 
@@ -13,6 +14,13 @@ public class PlayersList
   public PlayersList(int totalPlayerNumber){
     playersArray = new ArrayList<Player>();
     PlayersList.totalPlayerNumber = totalPlayerNumber;
+    switch (testingNumber){
+      case 2: winRequire = 6;
+      break;
+      case 3: winRequire = 5;
+      break;
+      case 4: winRequire = 4;
+      break;
     for (int i = 0; i < totalPlayerNumber ; i++){
       playersArray.add(new Player(i));
     }
