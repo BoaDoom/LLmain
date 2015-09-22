@@ -8,20 +8,21 @@ public class PlayersList
   private static int totalPlayerNumber; //final player count
   private static int winRequire; //number of round wins to win the game
   private int lastWinner; //playernumber of who won previous round, defaults to player 1 at posision 0
-  private int turnOrder = 0;
+  private int turnOrder;
   public List<Player> playersArray;
 
   //constructor
   public PlayersList(int totalPlayerNumber){
     playersArray = new ArrayList<Player>();
+    turnOrder = 0;
     lastWinner = 0; //default starting position for player rotation. aka, player one.
     PlayersList.totalPlayerNumber = totalPlayerNumber;
     switch (totalPlayerNumber){ //assigns the number of rounds to win the game
-      case 2: winRequire = 6;
+      case 2: setWinLimit(6);
       break;
-      case 3: winRequire = 5;
+      case 3: setWinLimit(5);
       break;
-      case 4: winRequire = 4;
+      case 4: setWinLimit(4);
       break;
     }
     for (int i = 0; i < totalPlayerNumber ; i++){
@@ -75,13 +76,15 @@ public class PlayersList
     }
   }
 
-  public void endOfTurn(){
-    if (turnOrder > totalPlayerNumber){
-      turnOrder = 0;
+  public void endOfTurn(){ //resets the turn counter to continue the round
+    if (turnOrder >= (totalPlayerNumber - 1)){
+      this.turnOrder = 0;
     }
     else{
       turnOrder++;
+
     }
+    System.out.println("turn order num: " + turnOrder);
   }
 
   public int getTurn(){
@@ -94,9 +97,10 @@ public class PlayersList
   public int getWinner(){ //gets the winner of the previous round
     return lastWinner;
   }
-
   public static int getTotalPlayers(){
     return totalPlayerNumber;
   }
-
+  public void setWinLimit(int number){
+    winRequire = number;
+  }
 }

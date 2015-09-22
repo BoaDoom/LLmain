@@ -2,15 +2,14 @@ import java.util.*;
 
 public class GameTable{
   private static int seatPositions;
-  private Card[][] tableTop;
 
   public GameTable(int playerCount){
     seatPositions = playerCount;
-    tableTop = new Card[PlayersList.MAXIMUM_PLAYER_COUNT][];
 
 
   }
-  public void discardCard(int playerPostion, Card card){
+  public void playCard(Player player, Card card){
+
 
   }
 

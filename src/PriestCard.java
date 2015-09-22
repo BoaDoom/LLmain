@@ -3,14 +3,13 @@ public class PriestCard extends Card{
 
 public static final String PRIEST_NAME = "Priest";
 public static final int PRIEST_VALUE = 2;
-public static final String PRIEST_DESC = "Priest lets you try and guess another players' card";
-public static final boolean PRIEST_TARGET = true;
+public static final String PRIEST_DESC = "Shows you another players' card";
 
   public PriestCard(){
-    super(PRIEST_NAME, PRIEST_VALUE, PRIEST_DESC, PRIEST_TARGET);
+    super(PRIEST_NAME, PRIEST_VALUE, PRIEST_DESC);
   }
-  public void action(Player activePlayer, PlayerList playerList){
-
+  public void action(Player activePlayer, List<Player> playerArray){
+    System.out.println(PRIEST_DESC);
   }
   // public void action(){
   //

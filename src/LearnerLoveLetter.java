@@ -21,33 +21,28 @@ public class LearnerLoveLetter{
       for(int i=0; i < playerCount; i++){ // deals out one card per person to start
         players.playersArray.get(i).takeCard(deck.deal());
       }
-      // for(int i=0; i < playerCount; i++){ //tester for printing out cards each player got
-      //   System.out.println(players.playersArray.get(i).getCard(0).getName());
-      // }
       while(players.checkActive()){ //starting of player rotation
         Player currentPlayer = (players.playersArray.get(players.getTurn()));
-        int cardChoice;
-        if (currentPlayer.getActive()){
+        if (currentPlayer.getActive()){ //checks if player is still in the round then executes a card deal and play if true
           currentPlayer.takeCard(deck.deal()); //deals the player a second card
-          cardChoice = gameTable.choosePlay(currentPlayer); //forces player to choose which card to keep and which to play
-
-          currentPlayer.discardCard(cardChoice);
-
-          break;
+          currentPlayer.choosePlay().action(currentPlayer, players.playersArray); //makes player choose which card to keep and which to play and then executes power
+          players.endOfTurn();
+          System.out.println("end of turn turn label: " + players.getTurn());
         }
         else{
           players.endOfTurn();
         }
 
-
-
-
-
+        if (deck.getDeckSize() == 0){
+          System.out.println("You ran out of cards");
+          break;
         }
+      }
       //----insert a check for who is still active and award them a point if they are the only remaining
       //----insert a check for who is still active and if there is more than one, compare final card value, award point to highest
           //----aslo eventually add a check incase the final remaining players have identical final card values
-      break;
+
+        break;
       }
 
 
