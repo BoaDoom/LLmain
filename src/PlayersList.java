@@ -7,20 +7,23 @@ public class PlayersList
   public static final int PLAYER_COUNT_EXTRA_RULE = 2; //the number of players where an extra set of rules is activated
   private static int totalPlayerNumber; //final player count
   private static int winRequire; //number of round wins to win the game
-  public int lastWinner = 0; //playernumber of who won previous round, defaults to player 1 at posision 0
+  private int lastWinner; //playernumber of who won previous round, defaults to player 1 at posision 0
+  private int turnOrder = 0;
   public List<Player> playersArray;
 
   //constructor
   public PlayersList(int totalPlayerNumber){
     playersArray = new ArrayList<Player>();
+    lastWinner = 0; //default starting position for player rotation. aka, player one.
     PlayersList.totalPlayerNumber = totalPlayerNumber;
-    switch (testingNumber){
+    switch (totalPlayerNumber){ //assigns the number of rounds to win the game
       case 2: winRequire = 6;
       break;
       case 3: winRequire = 5;
       break;
       case 4: winRequire = 4;
       break;
+    }
     for (int i = 0; i < totalPlayerNumber ; i++){
       playersArray.add(new Player(i));
     }
@@ -48,38 +51,51 @@ public class PlayersList
     if (testingNumber < MINIMUM_PLAYER_COUNT || testingNumber > MAXIMUM_PLAYER_COUNT){
       System.out.println("That was not between " + MINIMUM_PLAYER_COUNT + " and " + MAXIMUM_PLAYER_COUNT + "... try again (between " + MINIMUM_PLAYER_COUNT + " and " + MAXIMUM_PLAYER_COUNT + ")");
       return countingPlayers();
-      }
+    }
     else {
       return testingNumber;
-      }
     }
-
-  //asks for an inputed number and then checks to see if its an integer
-
-  // public static void setTotalPlayers(int totalP){
-  //       totalPlayerNumber = totalP;
-  //   }
-  public boolean activePlayers(){
-    int activeNumber = 0;
-    for(int i=0; i < totalPlayerNumber; i++){
-      if (playersArray.get(i).active){ //counts active players
-          activeNumber++;
-          }
-        else{
-          }
-        }
-    if (activeNumber >= MINIMUM_PLAYER_COUNT){ //checks it against minium player count to keep round active
-      return true;
-        }
-      else{
-      return false;
-      }
   }
 
+  //returns true if active players is above miniumum count to continue round
+  public boolean checkActive(){
+    int activeNumber = 0;
+    for(int i=0; i < totalPlayerNumber; i++){ //counts active players
+      if (playersArray.get(i).getActive()){
+          activeNumber++;
+      }
+      else{
+      }
+    }
+    if (activeNumber >= MINIMUM_PLAYER_COUNT){ //checks it against minium player count to keep round active
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
 
+  public void endOfTurn(){
+    if (turnOrder > totalPlayerNumber){
+      turnOrder = 0;
+    }
+    else{
+      turnOrder++;
+    }
+  }
 
-  public static int getTotalPlayers()
-  {
+  public int getTurn(){
+    return turnOrder;
+  }
+
+  public void setWinner(int winningPlayer){ //sets who last won a round
+    lastWinner = winningPlayer;
+  }
+  public int getWinner(){ //gets the winner of the previous round
+    return lastWinner;
+  }
+
+  public static int getTotalPlayers(){
     return totalPlayerNumber;
   }
 

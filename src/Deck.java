@@ -71,7 +71,7 @@ public class Deck{
   }
 
   public int getDeckSize(){
-    return cards.size()
+    return cards.size();
   }
 
   public String getCardName(int cardNumber){
