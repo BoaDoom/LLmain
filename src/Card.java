@@ -10,7 +10,7 @@ public class Card{
     this.desc = desc;
   }
 
-  public void action(Player activePlayer, List<Player> playerArray){
+  public void action(Player activePlayer, PlayersList players){
 
   }
 

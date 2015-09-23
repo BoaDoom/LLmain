@@ -8,22 +8,21 @@ public static final String GUARD_DESC = "Guard lets you try and guess another pl
   public GuardCard(){
     super(GUARD_NAME, GUARD_VALUE, GUARD_DESC);
   }
-  public void action(Player activePlayer, List<Player> playersArray){
+  public void action(Player activePlayer,  PlayersList players){
     @SuppressWarnings("resource")
-	   Scanner keyboardIn = new Scanner(System.in);
+	  Scanner keyboardIn = new Scanner(System.in);
     int selectedPlayer;
     System.out.println(GUARD_DESC + "\nSelect another player and guess their card" + "\nYou cannot select yourself");
-
-    for (int i=0; i < playersArray.size(); i++){ //prints list of availible targets
-      if (activePlayer.getPlayerNumber() != playersArray.get(i).getPlayerNumber()){
-        System.out.println((i+1) +": " + playersArray.get(i).getName());
+    for (int i=0; i < players.playersArray.size(); i++){ //prints list of availible targets
+      if (activePlayer.getPlayerNumber() != players.playersArray.get(i).getPlayerNumber()){
+        System.out.println((i+1) +": " + players.playersArray.get(i).getName());
       }
       else{
         System.out.println((i+1) +": thats you");
       }
     }
     selectedPlayer = (keyboardIn.nextInt() - 1);
-    System.out.println("other player has a " + playersArray.get(selectedPlayer).getCard(0).getName());
+    System.out.println("other player has a " + players.playersArray.get(selectedPlayer).getCard(0).getName());
 
 
   }

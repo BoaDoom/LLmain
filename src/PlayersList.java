@@ -30,10 +30,6 @@ public class PlayersList
     }
   }
 
-
-
-
-
   //asks for a number of players and checks for integer, then min and max
   public static int countingPlayers(){
     int testingNumber;
@@ -97,7 +93,7 @@ public class PlayersList
   public int getWinner(){ //gets the winner of the previous round
     return lastWinner;
   }
-  public static int getTotalPlayers(){
+  public int getTotalPlayers(){
     return totalPlayerNumber;
   }
   public void setWinLimit(int number){

@@ -1,10 +1,10 @@
 import java.util.*;
 
 public class Player{
-  private static int playerNumber;
   private boolean active;
   private boolean shielded;
   private int score;
+  private int playerNumber;
   private String playerName;
   private ArrayList<Card> currentHand;
   private ArrayList<Card> discardPile;
