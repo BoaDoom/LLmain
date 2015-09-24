@@ -2,9 +2,9 @@ import java.util.*;
 
 public class Deck{
 
-  public static final int GUARD_NUMBER = 3;
-  public static final int PRIEST_NUMBER = 3;
-  public static final int BARON_NUMBER = 3;
+  public static final int GUARD_NUMBER = 4;
+  public static final int PRIEST_NUMBER = 4;
+  public static final int BARON_NUMBER = 4;
   // public static final int HANDMAID_NUMBER = 2;
   // public static final int PRINCE_NUMBER = 2;
   // public static final int KING_NUMBER = 1;

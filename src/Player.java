@@ -11,6 +11,7 @@ public class Player{
 
   public Player(int playerNumber){
     active = true;
+    score = 0;
     this.playerName = "Player Number " + (playerNumber + 1);
     this.playerNumber = playerNumber;
     currentHand = new ArrayList<Card>();
@@ -19,13 +20,11 @@ public class Player{
 
 
   public Card choosePlay(){
-    Scanner keyboardIn = new Scanner(System.in);
     System.out.println("===============================");
     System.out.println(playerName + " it is your turn");
-    System.out.println("Choose which card to play, the remainder will be kept");
     System.out.println("Card 1: " + getCard(0).getName());
     System.out.println("Card 2: " + getCard(1).getName());
-    return discardCard(keyboardIn.nextInt()-1);
+    return discardCard(InputCheck.check("Choose which card to play, the remainder will be kept", 1, 2, null)-1);
   }
 
   public Card discardCard(int cardChoice){
@@ -56,6 +55,12 @@ public class Player{
   public void eliminate(){
     active = false;
   }
+  public void scorePoint(){
+    score++;
+  }
+  public int getScore(){
+    return score;
+  }
 
   public String getName(){
     return playerName;
@@ -75,9 +80,24 @@ public class Player{
   public void setShieldOff(){
     shielded = false;
   }
+  public boolean getShielded(){
+    if (shielded){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
 
   public void clearDiscard(){
     discardPile.clear();
+  }
+  public int totalOfDiscard(){
+    int total = 0;
+    for(int i=0; i < discardPile.size(); i++){
+      total += discardPile.get(i).getValue();
+    }
+    return total;
   }
 
 

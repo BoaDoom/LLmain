@@ -3,28 +3,24 @@ public class BaronCard extends Card{
 
 public static final String BARON_NAME = "Baron";
 public static final int BARON_VALUE = 3;
-public static final String BARON_DESC = "Baron lets you try and guess another players' card\nSelect another player to guess their card\nYou cannot select yourself";
+public static final String BARON_DESC = "Baron lets you see switch with another player\nSelect another player to switch cards\nYou cannot select yourself";
+public static final boolean BARON_SELF_TARGET = false;
+private int selectedCard;
+private Player selectedPlayer;
+private ArrayList<Integer> excluded; //list of player numbers inelligible to be target of the action
 
   public BaronCard(){
-    super(BARON_NAME, BARON_VALUE, BARON_DESC);
+    super(BARON_NAME, BARON_VALUE, BARON_DESC, BARON_SELF_TARGET);
   }
   public void action(Player activePlayer,  PlayersList players){
-    @SuppressWarnings("resource")
-	  Scanner keyboardIn = new Scanner(System.in);
-    int selectedPlayer;
+    excluded = new ArrayList<Integer>();
     System.out.println(BARON_DESC);
-    for (int i=0; i < players.playersArray.size(); i++){ //prints list of availible targets
-      if (activePlayer.getPlayerNumber() != players.playersArray.get(i).getPlayerNumber()){
-        System.out.println((i+1) +": " + players.playersArray.get(i).getName());
-      }
-      else{
-        System.out.println((i+1) +": thats you");
-      }
+    selectedPlayer = selectPlayer(activePlayer, players, BARON_SELF_TARGET); //allows for targeting of cards
+    if (selectedPlayer.getPlayerNumber() == activePlayer.getPlayerNumber() && !BARON_SELF_TARGET){    //if the only remaining target is self, and self isn't targetable
     }
-    selectedPlayer = (keyboardIn.nextInt() - 1);
-    System.out.println("Which card do you think they have?");
-
-
+    else{
+      System.out.println("The selected player has a " + selectedPlayer.getCard(0).getName());
+    }
   }
 
   // public void action(){
