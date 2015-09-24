@@ -33,7 +33,6 @@ public class PlayersList
   //asks for a number of players and checks for integer, then min and max
   public static int countingPlayers(){
     int testingNumber;
-    @SuppressWarnings("resource")
     Scanner keyboardIn = new Scanner(System.in);
     System.out.println("How many players? (between " + MINIMUM_PLAYER_COUNT + " and " + MAXIMUM_PLAYER_COUNT + ")");
     //checking for integer
@@ -50,6 +49,7 @@ public class PlayersList
       return countingPlayers();
     }
     else {
+      //keyboardIn.close(); //resolve 'memory leak' issue
       return testingNumber;
     }
   }
@@ -80,7 +80,6 @@ public class PlayersList
       turnOrder++;
 
     }
-    System.out.println("turn order num: " + turnOrder);
   }
 
   public int getTurn(){

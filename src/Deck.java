@@ -2,9 +2,9 @@ import java.util.*;
 
 public class Deck{
 
-  public static final int GUARD_NUMBER = 12;
-  public static final int PRIEST_NUMBER = 12;
-  // public static final int BARON_NUMBER = 2;
+  public static final int GUARD_NUMBER = 3;
+  public static final int PRIEST_NUMBER = 3;
+  public static final int BARON_NUMBER = 3;
   // public static final int HANDMAID_NUMBER = 2;
   // public static final int PRINCE_NUMBER = 2;
   // public static final int KING_NUMBER = 1;
@@ -24,9 +24,9 @@ public class Deck{
     for (int i=0; i < PRIEST_NUMBER; i++){
       cards.add(new PriestCard());
     }
-    // for (int i=0; i < BARON_NUMBER; i++){
-    //   cards.add(new BaronCard());
-    // }
+    for (int i=0; i < BARON_NUMBER; i++){
+      cards.add(new BaronCard());
+    }
     // for (int i=0; i < HANDMAID_NUMBER; i++){
     //   cards.add(new HandmaidCard());
     // }
@@ -56,14 +56,19 @@ public class Deck{
     Random ran = new Random();
     int totalCards = getTotalCardNumber();
     ArrayList<Card> tempDeck = new ArrayList<Card>();
-    for (int i=0; i < discards.size(); i++){ //takes cards from the discard array and puts them ontop of the card deck
-      cards.add(discards.remove((discards.size())));
+    int sizeOfDiscard = discards.size();
+    for (int i=0; i < (sizeOfDiscard); i++){ //takes cards from the discard array and puts them ontop of the card deck
+      cards.add(discards.remove(0));
     }
-    for (int i=0; i < totalCards; i++){ //takes all the cards and shuffles them together randomly
+    int sizeOfCards = cards.size();
+    for (int i=0; i < (sizeOfCards); i++){ //takes all the cards and shuffles them together randomly
       Card card = cards.remove(ran.nextInt(cards.size()));
       tempDeck.add(card);
+      //System.out.println("shuffled card: " + tempDeck.get(i).getName());    //for checking the cards being dealt
     }
     cards = tempDeck;
+
+
   }
 
   public int getTotalCardNumber(){

@@ -20,6 +20,8 @@ public class Player{
 
   public Card choosePlay(){
     Scanner keyboardIn = new Scanner(System.in);
+    System.out.println("===============================");
+    System.out.println(playerName + " it is your turn");
     System.out.println("Choose which card to play, the remainder will be kept");
     System.out.println("Card 1: " + getCard(0).getName());
     System.out.println("Card 2: " + getCard(1).getName());
@@ -37,18 +39,6 @@ public class Player{
     currentHand.add(card);
   }
 
-  public void playCard(int num){
-    currentHand.remove(num);
-  }
-
-  public void setActive(boolean boo){
-    if (boo){
-      active = true;
-    }
-    else{
-      active = false;
-    }
-  }
 
   public boolean getActive(){
     if (active){
@@ -57,6 +47,14 @@ public class Player{
     else{
       return false;
     }
+  }
+
+  public void setActive(){
+    active = true;
+  }
+
+  public void eliminate(){
+    active = false;
   }
 
   public String getName(){
@@ -73,6 +71,13 @@ public class Player{
 
   public void setShieldOn(){
     shielded = true;
+  }
+  public void setShieldOff(){
+    shielded = false;
+  }
+
+  public void clearDiscard(){
+    discardPile.clear();
   }
 
 
