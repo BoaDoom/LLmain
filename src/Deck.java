@@ -2,22 +2,26 @@ import java.util.*;
 
 public class Deck{
 
-  public static final int GUARD_NUMBER = 4;
-  public static final int PRIEST_NUMBER = 4;
-  public static final int BARON_NUMBER = 4;
-  // public static final int HANDMAID_NUMBER = 2;
-  // public static final int PRINCE_NUMBER = 2;
-  // public static final int KING_NUMBER = 1;
-  // public static final int COUNTESS_NUMBER = 1;
+  public static final int GUARD_NUMBER = 1;
+  public static final int PRIEST_NUMBER = 1;
+  public static final int BARON_NUMBER = 1;
+  public static final int HANDMAID_NUMBER = 1;
+  public static final int PRINCE_NUMBER = 1;
+  public static final int KING_NUMBER = 5;
+  public static final int COUNTESS_NUMBER = 5;
   // public static final int PRINCESS_NUMBER = 1;
+  public static final int EXTRA_RULE_CARD_COUNT = 3;
   private ArrayList<Card> cards;
   private ArrayList<Card> discards;
+  private ArrayList<Card> twoPlayerBurn;
+  private Card burnCard;
 
 
   public Deck(){
-
+    Card burnCard;
     cards = new ArrayList<Card>();
     discards = new ArrayList<Card>();
+    twoPlayerBurn = new ArrayList<Card>();
     for (int i=0; i < GUARD_NUMBER; i++){
       cards.add(new GuardCard());
     }
@@ -27,18 +31,18 @@ public class Deck{
     for (int i=0; i < BARON_NUMBER; i++){
       cards.add(new BaronCard());
     }
-    // for (int i=0; i < HANDMAID_NUMBER; i++){
-    //   cards.add(new HandmaidCard());
-    // }
-    // for (int i=0; i < PRINCE_NUMBER; i++){
-    //   cards.add(new PrinceCard());
-    // }
-    // for (int i=0; i < KING_NUMBER; i++){
-    //   cards.add(new KingCard());
-    // }
-    // for (int i=0; i < COUNTESS_NUMBER; i++){
-    //   cards.add(new CountessCard());
-    // }
+    for (int i=0; i < HANDMAID_NUMBER; i++){
+      cards.add(new HandmaidCard());
+    }
+    for (int i=0; i < PRINCE_NUMBER; i++){
+      cards.add(new PrinceCard());
+    }
+    for (int i=0; i < KING_NUMBER; i++){
+      cards.add(new KingCard());
+    }
+    for (int i=0; i < COUNTESS_NUMBER; i++){
+      cards.add(new CountessCard());
+    }
     // for (int i=0; i < PRINCESS_NUMBER; i++){
     //   cards.add(new PrincessCard());
     // }
@@ -47,7 +51,7 @@ public class Deck{
   public Card deal(){
     Card card = cards.remove(0);
     discards.add(card);
-    System.out.println("dealt a card:: " + card.getName());
+    System.out.println("dealt a card: " + card.getName());
     return card;
   }
 
@@ -67,6 +71,7 @@ public class Deck{
       //System.out.println("shuffled card: " + tempDeck.get(i).getName());    //for checking the cards being dealt
     }
     cards = tempDeck;
+    burnCard = deal();
 
 
   }
@@ -76,7 +81,7 @@ public class Deck{
     return deckSize;
   }
 
-  public int getDeckSize(){
+  public int size(){
     return cards.size();
   }
 
@@ -84,6 +89,16 @@ public class Deck{
     Card card = cards.get(cardNumber);
     String cardName = card.getName();
     return cardName;
+  }
+
+  public String shownPile(Card card){
+    twoPlayerBurn.add(card);
+    String cardName = card.getName();
+    return cardName;
+  }
+
+  public Card getBurnCard(){
+    return burnCard;
   }
 
 }

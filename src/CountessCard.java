@@ -3,30 +3,33 @@ public class CountessCard extends Card{
 
 public static final String COUNTESS_NAME = "Countess";
 public static final int COUNTESS_VALUE = 7;
-public static final String COUNTESS_DESC = "Countess lets you try and guess another players' card\nSelect another player to guess their card\nYou cannot select yourself";
+public static final String COUNTESS_DESC = "Countess cannot be in a hand with either the Prince or King\nIf she is ever in your hand with either of them, you are forced to discard the Countess";
+public static final boolean COUNTESS_SELF_TARGET = false;
+private int selectedCard;
+private Player selectedPlayer;
+private ArrayList<Integer> excluded; //list of player numbers inelligible to be target of the action
 
   public CountessCard(){
-    super(COUNTESS_NAME, COUNTESS_VALUE, COUNTESS_DESC);
+    super(COUNTESS_NAME, COUNTESS_VALUE, COUNTESS_DESC, COUNTESS_SELF_TARGET);
   }
-  public void action(Player activePlayer,  PlayersList players){
-    @SuppressWarnings("resource")
-	  Scanner keyboardIn = new Scanner(System.in);
-    int selectedPlayer;
+  public void action(Player activePlayer,  PlayersList players, Deck deck){
     System.out.println(COUNTESS_DESC);
-    for (int i=0; i < players.playersArray.size(); i++){ //prints list of availible targets
-      if (activePlayer.getPlayerNumber() != players.playersArray.get(i).getPlayerNumber()){
-        System.out.println((i+1) +": " + players.playersArray.get(i).getName());
-      }
-      else{
-        System.out.println((i+1) +": thats you");
-      }
-    }
-    selectedPlayer = (keyboardIn.nextInt() - 1);
-    System.out.println("Which card do you think they have?");
-
-
+    System.out.println("The Countess leaves your hand without effect");
   }
 
+  public static boolean check(int card1, int card2){ //checks to see if countess and king/prince are in the same hand
+    return ((card1 == CountessCard.COUNTESS_VALUE) || (card2 == CountessCard.COUNTESS_VALUE)
+    && (((card1 == KingCard.KING_VALUE) || (card2 == KingCard.KING_VALUE))
+    || ((card1 == PrinceCard.PRINCE_VALUE) || (card1 == PrinceCard.PRINCE_VALUE))));
+  }
+  public static Card check(Card card1, Card card2){   //performed after countess king/prince check, returns the countess card
+    if (card1.getValue() == CountessCard.COUNTESS_VALUE){
+      return card1;
+    }
+    else {
+      return card2;
+    }
+  }
   // public void action(){
   //
   // }

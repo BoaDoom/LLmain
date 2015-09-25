@@ -12,7 +12,7 @@ private ArrayList<Integer> excluded; //list of player numbers inelligible to be 
   public GuardCard(){
     super(GUARD_NAME, GUARD_VALUE, GUARD_DESC, GUARD_SELF_TARGET);
   }
-  public void action(Player activePlayer,  PlayersList players){
+  public void action(Player activePlayer,  PlayersList players, Deck deck){
     excluded = new ArrayList<Integer>();
     System.out.println(GUARD_DESC);
     selectedPlayer = selectPlayer(activePlayer, players, GUARD_SELF_TARGET); //allows for targeting of cards

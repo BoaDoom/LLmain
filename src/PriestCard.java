@@ -12,7 +12,7 @@ private ArrayList<Integer> excluded; //list of player numbers inelligible to be 
   public PriestCard(){
     super(PRIEST_NAME, PRIEST_VALUE, PRIEST_DESC, PRIEST_SELF_TARGET);
   }
-  public void action(Player activePlayer,  PlayersList players){
+  public void action(Player activePlayer,  PlayersList players, Deck deck){
     excluded = new ArrayList<Integer>();
     System.out.println(PRIEST_DESC);
     selectedPlayer = selectPlayer(activePlayer, players, PRIEST_SELF_TARGET); //allows for targeting of cards

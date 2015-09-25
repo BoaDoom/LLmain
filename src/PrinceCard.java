@@ -3,28 +3,32 @@ public class PrinceCard extends Card{
 
 public static final String PRINCE_NAME = "Prince";
 public static final int PRINCE_VALUE = 5;
-public static final String PRINCE_DESC = "Prince lets you try and guess another players' card\nSelect another player to guess their card\nYou cannot select yourself";
+public static final String PRINCE_DESC = "Prince forces a player of your choosing to discard their current hand and draw a new card.\nYou can target yourself";
+public static final boolean PRINCE_SELF_TARGET = true;
+private int selectedCard;
+private Player selectedPlayer;
+private ArrayList<Integer> excluded; //list of player numbers inelligible to be target of the action
 
   public PrinceCard(){
-    super(PRINCE_NAME, PRINCE_VALUE, PRINCE_DESC);
+    super(PRINCE_NAME, PRINCE_VALUE, PRINCE_DESC, PRINCE_SELF_TARGET);
   }
-  public void action(Player activePlayer,  PlayersList players){
-    @SuppressWarnings("resource")
-	  Scanner keyboardIn = new Scanner(System.in);
-    int selectedPlayer;
+  public void action(Player activePlayer,  PlayersList players, Deck deck){
+    excluded = new ArrayList<Integer>();
     System.out.println(PRINCE_DESC);
-    for (int i=0; i < players.playersArray.size(); i++){ //prints list of availible targets
-      if (activePlayer.getPlayerNumber() != players.playersArray.get(i).getPlayerNumber()){
-        System.out.println((i+1) +": " + players.playersArray.get(i).getName());
+    selectedPlayer = selectPlayer(activePlayer, players, PRINCE_SELF_TARGET); //allows for targeting of cards
+    if (selectedPlayer.getPlayerNumber() == activePlayer.getPlayerNumber() && !PRINCE_SELF_TARGET){    //if the only remaining target is self, and self isn't targetable
+    }
+    else{
+      System.out.println(selectedPlayer.getName() + " has discarded a " + selectedPlayer.getCard(0).getName());
+      selectedPlayer.discardCard(0);
+      if (deck.size() == 0){
+        System.out.println("There were no more cards to draw from, player recieves burn card");
+        selectedPlayer.takeCard(deck.getBurnCard());
       }
       else{
-        System.out.println((i+1) +": thats you");
+        selectedPlayer.takeCard(deck.deal());
       }
     }
-    selectedPlayer = (keyboardIn.nextInt() - 1);
-    System.out.println("Which card do you think they have?");
-
-
   }
 
   // public void action(){

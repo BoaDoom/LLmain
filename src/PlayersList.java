@@ -16,7 +16,7 @@ public class PlayersList
     turnOrder = 0;
     PlayersList.totalPlayerNumber = totalPlayerNumber;
     switch (totalPlayerNumber){ //assigns the number of rounds to win the game
-      case 2: setWinLimit(6);
+      case 2: setWinLimit(7);
       break;
       case 3: setWinLimit(5);
       break;

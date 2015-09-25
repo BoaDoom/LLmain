@@ -3,28 +3,18 @@ public class HandmaidCard extends Card{
 
 public static final String HANDMAID_NAME = "Handmaid";
 public static final int HANDMAID_VALUE = 4;
-public static final String HANDMAID_DESC = "Handmaid lets you try and guess another players' card\nSelect another player to guess their card\nYou cannot select yourself";
+public static final String HANDMAID_DESC = "Handmaid protects you from being effected by any card until your next turn";
+public static final boolean HANDMAID_SELF_TARGET = false;
+private int selectedCard;
+private Player selectedPlayer;
+private ArrayList<Integer> excluded; //list of player numbers inelligible to be target of the action
 
   public HandmaidCard(){
-    super(HANDMAID_NAME, HANDMAID_VALUE, HANDMAID_DESC);
+    super(HANDMAID_NAME, HANDMAID_VALUE, HANDMAID_DESC, HANDMAID_SELF_TARGET);
   }
-  public void action(Player activePlayer,  PlayersList players){
-    @SuppressWarnings("resource")
-	  Scanner keyboardIn = new Scanner(System.in);
-    int selectedPlayer;
+  public void action(Player activePlayer,  PlayersList players, Deck deck){
     System.out.println(HANDMAID_DESC);
-    for (int i=0; i < players.playersArray.size(); i++){ //prints list of availible targets
-      if (activePlayer.getPlayerNumber() != players.playersArray.get(i).getPlayerNumber()){
-        System.out.println((i+1) +": " + players.playersArray.get(i).getName());
-      }
-      else{
-        System.out.println((i+1) +": thats you");
-      }
-    }
-    selectedPlayer = (keyboardIn.nextInt() - 1);
-    System.out.println("Which card do you think they have?");
-
-
+    activePlayer.setShieldOn();
   }
 
   // public void action(){

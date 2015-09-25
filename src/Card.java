@@ -15,7 +15,7 @@ public class Card{
     this.selfTarget = selfTarget;
   }
 
-  public void action(Player activePlayer, PlayersList players){
+  public void action(Player activePlayer, PlayersList players, Deck deck){
   }
 
   public Player selectPlayer(Player activePlayer,  PlayersList players, boolean self){
@@ -43,7 +43,7 @@ public class Card{
         excluded.add(i);
       }
     }
-    if (excluded.size() < 1){
+    if (excluded.size() == players.playersArray.size()){
       System.out.println("There is no one to use this card on! and you cannot use it on yourself\n the card is discarded without any effect");
       return activePlayer;
     }
