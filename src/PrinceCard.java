@@ -20,7 +20,12 @@ private ArrayList<Integer> excluded; //list of player numbers inelligible to be 
     }
     else{
       System.out.println(selectedPlayer.getName() + " has discarded a " + selectedPlayer.getCard(0).getName());
-      selectedPlayer.discardCard(0);
+      if (selectedPlayer.getCard(0).getValue() == PrincessCard.PRINCESS_VALUE){
+        selectedPlayer.getCard(0).action(selectedPlayer, players, deck);
+      }
+      else{
+        selectedPlayer.discardCard(0);
+      }
       if (deck.size() == 0){
         System.out.println("There were no more cards to draw from, player recieves burn card");
         selectedPlayer.takeCard(deck.getBurnCard());

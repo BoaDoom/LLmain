@@ -14,7 +14,7 @@ private ArrayList<Integer> excluded; //list of player numbers inelligible to be 
   }
   public void action(Player activePlayer,  PlayersList players, Deck deck){
     System.out.println(PRINCESS_DESC);
-    System.out.println("You have discarded the Princess, you are elimated from the game")
+    System.out.println(activePlayer.getName() + "You have discarded the Princess, you are elimated from the game");
     activePlayer.eliminate();
   }
 
