@@ -2,14 +2,14 @@ import java.util.*;
 
 public class Deck{
 
-  public static final int GUARD_NUMBER = 1;
-  public static final int PRIEST_NUMBER = 1;
-  public static final int BARON_NUMBER = 1;
-  public static final int HANDMAID_NUMBER = 1;
-  public static final int PRINCE_NUMBER = 1;
-  public static final int KING_NUMBER = 5;
-  public static final int COUNTESS_NUMBER = 5;
-  // public static final int PRINCESS_NUMBER = 1;
+  public static final int GUARD_NUMBER = 5;
+  public static final int PRIEST_NUMBER = 2;
+  public static final int BARON_NUMBER = 2;
+  public static final int HANDMAID_NUMBER = 2;
+  public static final int PRINCE_NUMBER = 2;
+  public static final int KING_NUMBER = 1;
+  public static final int COUNTESS_NUMBER = 1;
+  public static final int PRINCESS_NUMBER = 1;
   public static final int EXTRA_RULE_CARD_COUNT = 3;
   private ArrayList<Card> cards;
   private ArrayList<Card> discards;
@@ -43,9 +43,9 @@ public class Deck{
     for (int i=0; i < COUNTESS_NUMBER; i++){
       cards.add(new CountessCard());
     }
-    // for (int i=0; i < PRINCESS_NUMBER; i++){
-    //   cards.add(new PrincessCard());
-    // }
+    for (int i=0; i < PRINCESS_NUMBER; i++){
+      cards.add(new PrincessCard());
+    }
   }
   //returns the top card of the deck, removing it from the deck and placing it in discards
   public Card deal(){
