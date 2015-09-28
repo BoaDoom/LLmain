@@ -1,6 +1,10 @@
 import java.util.*;
 public class InputCheck{
+  private static Scanner keyboardIn;
+  public InputCheck(){
+  }
   public static int check(String prompt, int min, int max, ArrayList<Integer> excluded){ //promt should be worded as "Select a number"
+    keyboardIn = new Scanner(System.in);
     int testingNumber;
     String excludedString = new String();
     try{
@@ -16,7 +20,6 @@ public class InputCheck{
     }
     catch(Exception e){}
     excludedString = excludedString + ".\n";
-    Scanner keyboardIn = new Scanner(System.in);
     System.out.print(prompt + " (options " + min + "-" + max + ")" + excludedString);
 
     //checking for integer
@@ -46,6 +49,7 @@ public class InputCheck{
     }
     return testingNumber;
 
-
   }
+
+
 }

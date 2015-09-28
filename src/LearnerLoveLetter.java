@@ -4,13 +4,16 @@ public class LearnerLoveLetter{
   public static Deck deck;
   public static int playerCount;
   public static boolean win;
+  public static InputCheck input;
 
 
   public static void main(String args[]){
 
     deck = new Deck();
+    input = new InputCheck();
     playerCount = InputCheck.check("How many players?", PlayersList.MINIMUM_PLAYER_COUNT, PlayersList.MAXIMUM_PLAYER_COUNT, null);     //asking for participating PlayersList and sending it to  'players'
     players = new PlayersList(playerCount);
+
 
     while(!win){     //start of a round
       deck.shuffle();
@@ -49,6 +52,7 @@ public class LearnerLoveLetter{
         if (players.playersArray.get(i).getScore() == players.getWinRequire()){
           System.out.println(players.playersArray.get(i).getName() + " has won the game!");
           win = true;
+
         }
       }
     }

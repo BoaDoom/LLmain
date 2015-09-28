@@ -3,7 +3,7 @@ public class KingCard extends Card{
 
 public static final String KING_NAME = "King";
 public static final int KING_VALUE = 6;
-public static final String KING_DESC = "King forces you and another player into a faceoff, showing eachother your cards\nwhichever card is the lowest is out of the round";
+public static final String KING_DESC = "King lets you see switch with another player\nSelect another player to switch cards\nYou cannot select yourself";
 public static final boolean KING_SELF_TARGET = false;
 private int selectedCard;
 private Player selectedPlayer;
@@ -18,20 +18,12 @@ private ArrayList<Integer> excluded; //list of player numbers inelligible to be 
     selectedPlayer = selectPlayer(activePlayer, players, KING_SELF_TARGET); //allows for targeting of cards
     if (selectedPlayer.getPlayerNumber() == activePlayer.getPlayerNumber() && !KING_SELF_TARGET){    //if the only remaining target is self, and self isn't targetable
     }
-    else{
-      System.out.println("You have a " + activePlayer.getCard());
-      System.out.println("and the selected player has a " + selectedPlayer.getCard());
-      if (activePlayer.getCard(0).getValue() > selectedPlayer.getCard(0).getValue()){
-        System.out.println("Your card is larger. you win and your opponent is knocked out");
-        selectedPlayer.eliminate();
-      }
-      else if (activePlayer.getCard(0).getValue() < selectedPlayer.getCard(0).getValue()){
-        System.out.println("Their card is larger. Your opponent wins and you are knocked out");
-        activePlayer.eliminate();
-      }
-      else if (activePlayer.getCard(0).getValue() == selectedPlayer.getCard(0).getValue()){
-        System.out.println("You both have the same card, no one is knocked out");
-      }
+    else{     //swaps cards
+      Card tempCard = selectedPlayer.discardCard();
+      selectedPlayer.takeCard(activePlayer.discardCard());
+      System.out.println(selectedPlayer.getName() + " you now have a " + selectedPlayer.getCard());
+      activePlayer.takeCard(tempCard);
+      System.out.println(activePlayer.getName() + " you now have a " + activePlayer.getCard());
     }
   }
 

@@ -3,7 +3,7 @@ public class BaronCard extends Card{
 
 public static final String BARON_NAME = "Baron";
 public static final int BARON_VALUE = 3;
-public static final String BARON_DESC = "Baron lets you see switch with another player\nSelect another player to switch cards\nYou cannot select yourself";
+public static final String BARON_DESC = "Baron forces you and another player into a faceoff, showing eachother your cards\nwhichever card is the lowest is out of the round";
 public static final boolean BARON_SELF_TARGET = false;
 private int selectedCard;
 private Player selectedPlayer;
@@ -18,12 +18,20 @@ private ArrayList<Integer> excluded; //list of player numbers inelligible to be 
     selectedPlayer = selectPlayer(activePlayer, players, BARON_SELF_TARGET); //allows for targeting of cards
     if (selectedPlayer.getPlayerNumber() == activePlayer.getPlayerNumber() && !BARON_SELF_TARGET){    //if the only remaining target is self, and self isn't targetable
     }
-    else{     //swaps cards
-      Card tempCard = selectedPlayer.discardCard();
-      selectedPlayer.takeCard(activePlayer.discardCard());
-      System.out.println(selectedPlayer.getName() + " you now have a " + selectedPlayer.getCard());
-      activePlayer.takeCard(tempCard);
-      System.out.println(activePlayer.getName() + " you now have a " + activePlayer.getCard());
+    else{
+      System.out.println("You have a " + activePlayer.getCard());
+      System.out.println("and the selected player has a " + selectedPlayer.getCard());
+      if (activePlayer.getCard(0).getValue() > selectedPlayer.getCard(0).getValue()){
+        System.out.println("Your card is larger. you win and your opponent is knocked out");
+        selectedPlayer.eliminate();
+      }
+      else if (activePlayer.getCard(0).getValue() < selectedPlayer.getCard(0).getValue()){
+        System.out.println("Their card is larger. Your opponent wins and you are knocked out");
+        activePlayer.eliminate();
+      }
+      else if (activePlayer.getCard(0).getValue() == selectedPlayer.getCard(0).getValue()){
+        System.out.println("You both have the same card, no one is knocked out");
+      }
     }
   }
 

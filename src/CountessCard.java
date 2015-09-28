@@ -18,9 +18,10 @@ private ArrayList<Integer> excluded; //list of player numbers inelligible to be 
   }
 
   public static boolean check(int card1, int card2){ //checks to see if countess and king/prince are in the same hand
+    //System.out.println("("+card1+"=="+CountessCard.COUNTESS_VALUE+") || ("+card2+"=="+CountessCard.COUNTESS_VALUE+") && ((("+card1+"=="+KingCard.KING_VALUE+") || ("+card2+"=="+KingCard.KING_VALUE+")) || (("+card1+"=="+PrinceCard.PRINCE_VALUE+") || ("+card2+"=="+PrinceCard.PRINCE_VALUE+")))");
     return ((card1 == CountessCard.COUNTESS_VALUE) || (card2 == CountessCard.COUNTESS_VALUE)
     && (((card1 == KingCard.KING_VALUE) || (card2 == KingCard.KING_VALUE))
-    || ((card1 == PrinceCard.PRINCE_VALUE) || (card1 == PrinceCard.PRINCE_VALUE))));
+    || ((card1 == PrinceCard.PRINCE_VALUE) || (card2 == PrinceCard.PRINCE_VALUE))));
   }
   public static Card check(Card card1, Card card2){   //performed after countess king/prince check, returns the countess card
     if (card1.getValue() == CountessCard.COUNTESS_VALUE){
